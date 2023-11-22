@@ -27,7 +27,7 @@ void swap(int *a, int  *b)
 int lomuto_partition(int *array, int low, int high)
 {
 	int pivot = array[high];
-	int i = low - 1, j;
+	int i = low - 1, j, k;
 
 	for (j = low; j < high; j++)
 	{
@@ -35,6 +35,12 @@ int lomuto_partition(int *array, int low, int high)
 		{
 			i++;
 			swap(&array[i], &array[j]);
+
+			for (k = 0; k <= high; k++)
+			{
+				printf("%d, ", array[k]);
+			}
+			printf("\n");
 		}
 	}
 	swap(&array[i + 1], &array[high]);
@@ -42,24 +48,23 @@ int lomuto_partition(int *array, int low, int high)
 }
 
 /** 
- * quick_sort_recursive - Recursive funstion to sort an array using
- * Quick Sort
+ * quick_sort_helper - Helper to the quick sort function
  * @array: The array to be sorted
  * @low: The low index of the partition
  * @high: The high index f the partition
  * @size: size of the array
  */
 
-void quick_sort_recursive(int *array, int low, int high)
+void quick_sort_helper(int *array, int low, int high)
 {
-	int pivot_index;
+	int partition_index;
 
 	if (low < high)
 	{
-		pivot_index = lomuto_partition(array, low, high);
+		partition_index = lomuto_partition(array, low, high);
 
-		quick_sort_recursive(array, low, pivot_index - 1);
-		quick_sort_recursive(array, pivot_index + 1, high);
+		quick_sort_helper(array, low, partition_index - 1);
+		quick_sort_helper(array, partition_index + 1, high);
 	}
 }
 
@@ -72,10 +77,6 @@ void quick_sort_recursive(int *array, int low, int high)
 
 void quick_sort(int *array, size_t size)
 {
-	if (array == NULL || size <= 1)
-
-	{
-		return;
-	}
-	quick_sort_recursive(array, 0, size - 1);
+	quick_sort_helper(array, 0, size - 1);
+	
 }

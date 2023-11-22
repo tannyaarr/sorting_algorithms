@@ -29,7 +29,7 @@ void insert_sorted(listint_t **head, listint_t **new_node);
 listint_t *create_node(int n, listint_t *prev, listint_t *next);
 int lomuto_partition(int *array, int low, int high);
 void swap(int *a, int *b);
-void quick_sort_recursive(int *array, int low, int hight);
+void quick_sort_helper(int *array, int low, int hight);
 void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
